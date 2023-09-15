@@ -1,0 +1,15 @@
+<html >
+
+    <head>
+        <meta charset=“UTF-8“>
+        <title>entrou</title>
+    </head>
+    <body>
+{% csrf_token %}
+    Bem-vinde {{e}}
+
+    <button type="button" onclick="location.href='{% url 'biblioteca:entrar' %}'">Sair</button>
+
+
+    </body>
+</html>

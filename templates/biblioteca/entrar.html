@@ -1,0 +1,32 @@
+{% extends "./base.html" %}
+{% load static %}
+{% block title %}entrar{% endblock %}
+{% block content %}
+
+{% if msg %}<script>alert('{{msg}}')</script>{% endif %}
+
+<html>
+
+<head>
+<meta charset=“UTF-8“>
+<title>Sign</title>
+
+</head>
+
+<body>
+<form action="/postentrar/" method="post">
+{% csrf_token %}
+
+Email :
+<input type="email" name="email">
+Senha:
+<input type="senha" name="senha">
+<input type="submit" value="entrar">
+<button type="button" onclick="location.href='{% url 'biblioteca:cadastro' %}'">Cadastro</button>
+
+
+</form>
+</body>
+</html>
+
+{% endblock %}

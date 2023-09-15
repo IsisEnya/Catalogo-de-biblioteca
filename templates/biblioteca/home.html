@@ -1,0 +1,97 @@
+{% extends "./base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="h1 fw-bold">Procure, reserve e avalie sua obra favorita</h1>
+        <p class="lead text-muted">isso aqui vai virar um banner</p>
+        <h1>Firebase Database</h1>
+
+        <p>Hi, my name is {{nome}} and i abilidade {{abi}}.</p>
+        
+        <p>
+          <a href="{% url 'biblioteca:entrar' %}" class="btn btn-primary my-2">Make an account</a>
+        </p>genero
+      </div>
+    </div>
+  </section>
+
+  <form class="d-flex" method="POST" action="{% url 'biblioteca:procurar' %}">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" id="search" placeholder="Pesquisar" aria-label="Search" name="searched">
+    <select class="form-select me-2" id="filter2" name="filtro">
+      <option value="titulo">Título</option>
+     
+      <option value="autor">Editora</option>
+      <option value="data">Data de publicação</option>
+    </select>
+    <button class="btn btn-outline-success" type="submit" id="butao">Search</button>
+  </form>
+  
+  <div class="album py-5">
+    <div class="container">
+      {% if livros %}
+      <h2>Resultados da pesquisa:</h2>
+      <ul>
+        {% for livro in livros %}
+        <li>{{ livro }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>Nenhum resultado encontrado.</p>
+      {% endif %}
+    </div>
+  </div>
+
+      <div class="pb-3 h5">Todos os livros</div>
+      <div class="row row-cols-2 row-cols-md-4 g-2">
+
+        {% for livros in all_livros %}
+        
+
+        <div class="col">
+          <div class="card h-100" >
+            <img src="{{ product.image.url }}" class="card-img-top" >
+            <div class="card-body">
+              
+              <a class="text-muted text-decoration-none" href="{% url 'biblioteca:detalhe_livro' slug=livros.value.slug %}">
+
+                  Título: {{ livros.value.titulo }} <hr>Autor: {{ livros.value.autor }} </a>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+        
+<!-- <form action="/postcreate/" method="post">
+    {% csrf_token %}
+    <br>
+    Title:
+    <input type="text" name="work" required><br><br>
+    Type Something:
+    <textarea rows="5" cols="40" name="progress" required></textarea>
+    <br><br>
+    Document Upload:
+    <input type="file" name="files[]" id="files">
+    <input type="hidden" name="url" id="url">
+    <button type="button" onclick="uploadimage()">Upload</button><br><br>
+    <input type="submit" value="Submit"><br><br>
+</form>
+ -->
+      </div>
+    </div>
+  </div>
+
+
+</main>
+
+{% endblock %}
